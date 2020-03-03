@@ -1,0 +1,8 @@
+.git
+*/.*_history
+*/node_modules
+*/.npm
+*/dist
+v1/static/audio/tts
+v1/static/audio/freesound.org
+
