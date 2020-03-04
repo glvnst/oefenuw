@@ -3,12 +3,12 @@
     <div class="select is-rounded">
       <select v-model="$i18n.locale">
         <option
-          v-for="(lang, langCode) in supportedLangs"
+          v-for="(lang, langCode) in enabledLanguages"
           :key="langCode"
           :value="langCode"
           :class="{ rtl: lang.rtl }"
         >
-          {{ lang["name"] }}
+          {{ lang["s"] }}
         </option>
       </select>
     </div>
@@ -20,822 +20,283 @@
 // Much of this language data comes from:
 // <https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code>
 const langs = {
-  gv: {
-    name: "Gaelg"
-  },
-  gu: {
-    name: "ગુજરાતી"
-  },
-  scn: {
-    name: "Sicilianu"
-  },
-  tokipona: {
-    name: "tokipona"
-  },
-  cdo: {
-    name: "Mìng-dĕ̤ng-ngṳ̄ / 閩東語"
-  },
-  sco: {
-    name: "Scots"
-  },
-  gd: {
-    name: "Gàidhlig"
-  },
-  ga: {
-    name: "Gaeilge"
-  },
-  gn: {
-    name: "Avañe'ẽ"
-  },
-  gl: {
-    name: "Galego"
-  },
-  als: {
-    name: "Alemannisch"
-  },
-  lg: {
-    name: "Luganda"
-  },
-  hak: {
-    name: "客家語/Hak-kâ-ngî"
-  },
-  lb: {
-    name: "Lëtzebuergesch"
-  },
-  la: {
-    name: "Latina"
-  },
-  ln: {
-    name: "Lingála"
-  },
-  lo: {
-    name: "ລາວ / Pha xa lao"
-  },
-  xmf: {
-    name: "მარგალური"
-  },
-  tr: {
-    name: "Türkçe"
-  },
-  ts: {
-    name: "Xitsonga"
-  },
-  li: {
-    name: "Limburgs"
-  },
-  lv: {
-    name: "Latviešu"
-  },
-  to: {
-    name: "Lea Faka-Tonga"
-  },
-  lt: {
-    name: "Lietuvių"
-  },
-  "zh-yue": {
-    name: "粵語 / 粤语"
-  },
-  pdc: {
-    name: "Deitsch"
-  },
-  khw: {
-    name: "کھوار",
-    rtl: true
-  },
-  ti: {
-    name: "ትግርኛ"
-  },
-  tg: {
-    name: "Тоҷикӣ"
-  },
-  te: {
-    name: "తెలుగు"
-  },
-  ksh: {
-    name: "Ripoarisch"
-  },
-  haw: {
-    name: "Hawai`i"
-  },
-  yi: {
-    name: "ייִדיש",
-    rtl: true
-  },
-  ty: {
-    name: "Reo Mā`ohi"
-  },
-  udm: {
-    name: "Удмурт кыл"
-  },
-  ceb: {
-    name: "Sinugboanong Binisaya"
-  },
-  yo: {
-    name: "Yorùbá"
-  },
-  de: {
-    name: "Deutsch"
-  },
-  da: {
-    name: "Dansk"
-  },
-  za: {
-    name: "Cuengh / Tôô / 壮语"
-  },
-  ta: {
-    name: "தமிழ்"
-  },
-  bxr: {
-    name: "Буряад хэлэн"
-  },
-  dz: {
-    name: "ཇོང་ཁ"
-  },
-  new: {
-    name: "नेपालभाषा / Newah Bhaye"
-  },
-  dv: {
-    name: "ދިވެހިބަސް",
-    rtl: true
-  },
-  qu: {
-    name: "Runa Simi"
-  },
-  vls: {
-    name: "West-Vlaoms"
-  },
-  bar: {
-    name: "Boarisch"
-  },
-  war: {
-    name: "Winaray / Binisaya Lineyte-Samarnon"
-  },
-  gbm: {
-    name: "गढ़वळी"
-  },
-  "fiu-vro": {
-    name: "Võro"
-  },
-  bpy: {
-    name: "ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী"
-  },
-  diq: {
-    name: "Zazaki"
-  },
-  el: {
-    name: "Ελληνικά"
-  },
-  eo: {
-    name: "Esperanto"
-  },
-  en: {
-    name: "English"
-  },
-  zh: {
-    name: "中文"
-  },
-  pms: {
-    name: "Piemontèis"
-  },
-  ee: {
-    name: "Ɛʋɛ"
-  },
-  tpi: {
-    name: "Tok Pisin"
-  },
-  rmy: {
-    name: "Romani / रोमानी"
-  },
-  lan: {
-    name: "Leb Lango / Luo"
-  },
-  mh: {
-    name: "Kajin Majel / Ebon"
-  },
-  arc: {
-    name: "ܣܘܪܬ",
-    rtl: true
-  },
-  uk: {
-    name: "Українська"
-  },
-  eu: {
-    name: "Euskara"
-  },
-  et: {
-    name: "Eesti"
-  },
-  tet: {
-    name: "Tetun"
-  },
-  es: {
-    name: "Español"
-  },
-  ru: {
-    name: "Русский"
-  },
-  rw: {
-    name: "Kinyarwandi"
-  },
-  mus: {
-    name: "Mvskoke"
-  },
-  rm: {
-    name: "Rumantsch"
-  },
-  si: {
-    name: "සිංහල"
-  },
-  got: {
-    name: "gutisk"
-  },
-  rn: {
-    name: "Kirundi"
-  },
-  ro: {
-    name: "Română"
-  },
-  dsb: {
-    name: "Dolnoserbski"
-  },
-  jv: {
-    name: "Basa Jawa"
-  },
-  be: {
-    name: "Беларуская"
-  },
-  bg: {
-    name: "Български"
-  },
-  ba: {
-    name: "Башҡорт"
-  },
-  wa: {
-    name: "Walon"
-  },
-  ast: {
-    name: "Asturianu"
-  },
-  wo: {
-    name: "Wollof"
-  },
-  bm: {
-    name: "Bamanankan"
-  },
-  bn: {
-    name: "বাংলা"
-  },
-  bo: {
-    name: "བོད་ཡིག / Bod skad"
-  },
-  bh: {
-    name: "भोजपुरी"
-  },
-  bi: {
-    name: "Bislama"
-  },
-  "map-bms": {
-    name: "Basa Banyumasan"
-  },
-  tum: {
-    name: "chiTumbuka"
-  },
-  br: {
-    name: "Brezhoneg"
-  },
-  bs: {
-    name: "Bosanski"
-  },
-  ja: {
-    name: "日本語"
-  },
-  om: {
-    name: "Oromoo"
-  },
-  oj: {
-    name: "ᐊᓂᔑᓈᐯᒧᐎᓐ / Anishinaabemowin"
-  },
-  ilo: {
-    name: "Ilokano"
-  },
-  "roa-rup": {
-    name: "Armâneashti"
-  },
-  oc: {
-    name: "Occitan"
-  },
-  "be-tarask": {
-    name: "Беларуская (тарашкевіца)"
-  },
-  st: {
-    name: "Sesotho"
-  },
-  tw: {
-    name: "Twi"
-  },
-  nds: {
-    name: "Plattdüütsch"
-  },
-  tlh: {
-    name: "tlhIngan-Hol"
-  },
-  os: {
-    name: "Иронау"
-  },
-  or: {
-    name: "ଓଡ଼ିଆ"
-  },
-  pih: {
-    name: "Norfuk"
-  },
-  xh: {
-    name: "isiXhosa"
-  },
-  ch: {
-    name: "Chamoru"
-  },
-  co: {
-    name: "Corsu"
-  },
-  nso: {
-    name: "Sesotho sa Leboa / Sepedi"
-  },
-  simple: {
-    name: "Simple English"
-  },
-  ca: {
-    name: "Català"
-  },
-  lmo: {
-    name: "Lumbaart"
-  },
-  ce: {
-    name: "Нохчийн"
-  },
-  cy: {
-    name: "Cymraeg"
-  },
-  ang: {
-    name: "Englisc"
-  },
-  vec: {
-    name: "Vèneto"
-  },
-  cs: {
-    name: "Česky"
-  },
-  cr: {
-    name: "Nehiyaw"
-  },
-  "zh-min-nan": {
-    name: "Bân-lâm-gú"
-  },
-  cv: {
-    name: "Чăваш"
-  },
-  cu: {
-    name: "словѣньскъ / slověnĭskŭ"
-  },
-  ve: {
-    name: "Tshivenḓa"
-  },
-  ps: {
-    name: "پښتو",
-    rtl: true
-  },
-  pt: {
-    name: "Português"
-  },
-  "zh-tw": {
-    name: "‪中文(台灣)‬"
-  },
-  sm: {
-    name: "Gagana Samoa"
-  },
-  tl: {
-    name: "Tagalog"
-  },
-  cho: {
-    name: "Choctaw"
-  },
-  chr: {
-    name: "ᏣᎳᎩ"
-  },
-  frp: {
-    name: "Arpitan / francoprovençal"
-  },
-  xal: {
-    name: "Хальмг"
-  },
-  "zh-classical": {
-    name: "文言"
-  },
-  vi: {
-    name: "Việtnam"
-  },
-  chy: {
-    name: "Tsetsêhestâhese"
-  },
-  gil: {
-    name: "Taetae ni kiribati"
-  },
-  is: {
-    name: "Íslenska"
-  },
-  pl: {
-    name: "Polski"
-  },
-  tk: {
-    name: "Туркмен / تركمن"
-  },
-  hz: {
-    name: "Otsiherero"
-  },
-  hy: {
-    name: "Հայերեն"
-  },
-  th: {
-    name: "ไทย / Phasa Thai"
-  },
-  nrm: {
-    name: "Nouormand / Normaund"
-  },
-  hr: {
-    name: "Hrvatski"
-  },
-  iu: {
-    name: "ᐃᓄᒃᑎᑐᑦ"
-  },
-  ht: {
-    name: "Krèyol ayisyen"
-  },
-  hu: {
-    name: "Magyar"
-  },
-  gan: {
-    name: "贛語"
-  },
-  "bat-smg": {
-    name: "Žemaitėška"
-  },
-  hi: {
-    name: "हिन्दी"
-  },
-  ho: {
-    name: "Hiri Motu"
-  },
-  ha: {
-    name: "هَوُسَ",
-    rtl: true
-  },
-  bug: {
-    name: "ᨅᨔ ᨕᨘᨁᨗ / Basa Ugi"
-  },
-  he: {
-    name: "עברית",
-    rtl: true
-  },
-  mg: {
-    name: "官話/官话"
-  },
-  pi: {
-    name: "Pāli / पाऴि"
-  },
-  fur: {
-    name: "Furlan"
-  },
-  sc: {
-    name: "Sardu"
-  },
-  uz: {
-    name: "Ўзбек"
-  },
-  ml: {
-    name: "മലയാളം"
-  },
-  mo: {
-    name: "Moldovenească"
-  },
-  mn: {
-    name: "Монгол"
-  },
-  mi: {
-    name: "Māori"
-  },
-  ik: {
-    name: "Iñupiak"
-  },
-  mk: {
-    name: "Македонски"
-  },
-  ur: {
-    name: "اردو",
-    rtl: true
-  },
-  mt: {
-    name: "bil-Malti"
-  },
-  tt: {
-    name: "Tatarça"
-  },
-  ms: {
-    name: "Bahasa Melayu"
-  },
-  mr: {
-    name: "मराठी"
-  },
-  ber: {
-    name: "ⵜⴰⵎⴰⵣⵉⵖⵜ / Tamaziɣt"
-  },
-  ug: {
-    name: "Uyƣurqə / ئۇيغۇرچە"
-  },
-  mwl: {
-    name: "Mirandés"
-  },
-  my: {
-    name: "Myanmasa"
-  },
-  pa: {
-    name: "ਪੰਜਾਬੀ / पंजाबी / پنجابي"
-  },
-  aa: {
-    name: "Afar"
-  },
-  ab: {
-    name: "Аҧсуа"
-  },
-  ss: {
-    name: "SiSwati"
-  },
-  af: {
-    name: "Afrikaans"
-  },
-  tn: {
-    name: "Setswana"
-  },
-  sw: {
-    name: "Kiswahili"
-  },
-  ak: {
-    name: "Akana"
-  },
-  am: {
-    name: "አማርኛ"
-  },
-  it: {
-    name: "Italiano"
-  },
-  an: {
-    name: "Aragonés"
-  },
-  ii: {
-    name: "ꆇꉙ / 四川彝语"
-  },
-  ia: {
-    name: "Interlingua"
-  },
-  as: {
-    name: "অসমীয়া"
-  },
-  ar: {
-    name: "العربية",
-    rtl: true
-  },
-  inh: {
-    name: "ГӀалгӀай"
-  },
-  su: {
-    name: "Basa Sunda"
-  },
-  io: {
-    name: "Ido"
-  },
-  av: {
-    name: "Авар"
-  },
-  ay: {
-    name: "Aymar"
-  },
-  az: {
-    name: "Azərbaycanca / آذربايجان"
-  },
-  ie: {
-    name: "Interlingue"
-  },
-  id: {
-    name: "Bahasa Indonesia"
-  },
-  ig: {
-    name: "Igbo"
-  },
-  pap: {
-    name: "Papiamentu"
-  },
-  sk: {
-    name: "Slovenčina"
-  },
-  sr: {
-    name: "Српски"
-  },
-  nl: {
-    name: "Nederlands"
-  },
-  nn: {
-    name: "Norsk (nynorsk)"
-  },
-  min: {
-    name: "Minangkabau"
-  },
-  na: {
-    name: "Dorerin Naoero"
-  },
-  nah: {
-    name: "Nahuatl"
-  },
-  nd: {
-    name: "Sindebele"
-  },
-  ne: {
-    name: "नेपाली"
-  },
-  lij: {
-    name: "Líguru"
-  },
-  csb: {
-    name: "Kaszëbsczi"
-  },
-  ny: {
-    name: "Chi-Chewa"
-  },
-  nap: {
-    name: "Nnapulitano"
-  },
-  vo: {
-    name: "Volapük"
-  },
-  "nds-nl": {
-    name: "Nedersaksisch"
-  },
-  pag: {
-    name: "Pangasinan"
-  },
-  zu: {
-    name: "isiZulu"
-  },
-  so: {
-    name: "Soomaaliga"
-  },
-  nr: {
-    name: "isiNdebele"
-  },
-  pam: {
-    name: "Kapampangan"
-  },
-  nv: {
-    name: "Diné bizaad"
-  },
-  sn: {
-    name: "chiShona"
-  },
-  sq: {
-    name: "Shqip"
-  },
-  fr: {
-    name: "Français"
-  },
-  ng: {
-    name: "Oshiwambo"
-  },
-  lad: {
-    name: "Dzhudezmo / Djudeo-Espanyol"
-  },
-  fy: {
-    name: "Frysk"
-  },
-  sv: {
-    name: "Svenska"
-  },
-  fa: {
-    name: "فارسی",
-    rtl: true
-  },
-  ff: {
-    name: "Fulfulde"
-  },
-  fi: {
-    name: "Suomi"
-  },
-  fj: {
-    name: "Na Vosa Vakaviti"
-  },
-  "closed-zh-tw": {
-    name: "‪中文(台灣)‬"
-  },
-  sa: {
-    name: "संस्कृतम्"
-  },
-  awa: {
-    name: "Awadhi"
-  },
-  fo: {
-    name: "Føroyskt"
-  },
-  bcl: {
-    name: "Bikol Central"
-  },
-  ka: {
-    name: "ქართული"
-  },
-  kg: {
-    name: "KiKongo"
-  },
-  kk: {
-    name: "Қазақша"
-  },
-  kj: {
-    name: "Kuanyama"
-  },
-  ki: {
-    name: "Gĩkũyũ"
-  },
-  no: {
-    name: "Norsk (bokmål / riksmål)"
-  },
-  ko: {
-    name: "한국어"
-  },
-  kn: {
-    name: "ಕನ್ನಡ"
-  },
-  km: {
-    name: "ភាសាខ្មែរ"
-  },
-  kl: {
-    name: "Kalaallisut"
-  },
-  ks: {
-    name: "कश्मीरी / كشميري",
-    rtl: true
-  },
-  kr: {
-    name: "Kanuri"
-  },
-  ext: {
-    name: "Estremeñu"
-  },
-  sh: {
-    name: "Srpskohrvatski / Српскохрватски"
-  },
-  kw: {
-    name: "Kernewek"
-  },
-  kv: {
-    name: "Коми"
-  },
-  ku: {
-    name: "Kurdî / كوردی",
-    rtl: true
-  },
-  sl: {
-    name: "Slovenščina"
-  },
-  jbo: {
-    name: "Lojban"
-  },
-  ky: {
-    name: "Kırgızca / Кыргызча"
-  },
-  sg: {
-    name: "Sängö"
-  },
-  nb: {
-    name: "Norsk (bokmål)"
-  },
-  se: {
-    name: "Davvisámegiella"
-  },
-  sd: {
-    name: "सिनधि"
-  }
+  aa: { s: "Afar" },
+  ab: { s: "Аҧсуа" },
+  af: { s: "Afrikaans" },
+  ak: { s: "Akana" },
+  als: { s: "Alemannisch" },
+  am: { s: "አማርኛ" },
+  an: { s: "Aragonés" },
+  ang: { s: "Englisc" },
+  ar: { s: "العربية", rtl: true },
+  arc: { s: "ܣܘܪܬ", rtl: true },
+  as: { s: "অসমীয়া" },
+  ast: { s: "Asturianu" },
+  av: { s: "Авар" },
+  awa: { s: "Awadhi" },
+  ay: { s: "Aymar" },
+  az: { s: "Azərbaycanca / آذربايجان" },
+  ba: { s: "Башҡорт" },
+  bar: { s: "Boarisch" },
+  "bat-smg": { s: "Žemaitėška" },
+  bcl: { s: "Bikol Central" },
+  "be-tarask": { s: "Беларуская (тарашкевіца)" },
+  be: { s: "Беларуская" },
+  ber: { s: "ⵜⴰⵎⴰⵣⵉⵖⵜ / Tamaziɣt" },
+  bg: { s: "Български" },
+  bh: { s: "भोजपुरी" },
+  bi: { s: "Bislama" },
+  bm: { s: "Bamanankan" },
+  bn: { s: "বাংলা" },
+  bo: { s: "བོད་ཡིག / Bod skad" },
+  bpy: { s: "ইমার ঠার/বিষ্ণুপ্রিয়া মণিপুরী" },
+  br: { s: "Brezhoneg" },
+  bs: { s: "Bosanski" },
+  bug: { s: "ᨅᨔ ᨕᨘᨁᨗ / Basa Ugi" },
+  bxr: { s: "Буряад хэлэн" },
+  ca: { s: "Català" },
+  cdo: { s: "Mìng-dĕ̤ng-ngṳ̄ / 閩東語" },
+  ce: { s: "Нохчийн" },
+  ceb: { s: "Sinugboanong Binisaya" },
+  ch: { s: "Chamoru" },
+  cho: { s: "Choctaw" },
+  chr: { s: "ᏣᎳᎩ" },
+  chy: { s: "Tsetsêhestâhese" },
+  "closed-zh-tw": { s: "‪中文(台灣)‬" },
+  co: { s: "Corsu" },
+  cr: { s: "Nehiyaw" },
+  cs: { s: "Česky" },
+  csb: { s: "Kaszëbsczi" },
+  cu: { s: "словѣньскъ / slověnĭskŭ" },
+  cv: { s: "Чăваш" },
+  cy: { s: "Cymraeg" },
+  da: { s: "Dansk" },
+  de: { s: "Deutsch" },
+  diq: { s: "Zazaki" },
+  dsb: { s: "Dolnoserbski" },
+  dv: { s: "ދިވެހިބަސް", rtl: true },
+  dz: { s: "ཇོང་ཁ" },
+  ee: { s: "Ɛʋɛ" },
+  el: { s: "Ελληνικά" },
+  en: { s: "English" },
+  eo: { s: "Esperanto" },
+  es: { s: "Español" },
+  et: { s: "Eesti" },
+  eu: { s: "Euskara" },
+  ext: { s: "Estremeñu" },
+  fa: { s: "فارسی", rtl: true },
+  ff: { s: "Fulfulde" },
+  fi: { s: "Suomi" },
+  "fiu-vro": { s: "Võro" },
+  fj: { s: "Na Vosa Vakaviti" },
+  fo: { s: "Føroyskt" },
+  fr: { s: "Français" },
+  frp: { s: "Arpitan / francoprovençal" },
+  fur: { s: "Furlan" },
+  fy: { s: "Frysk" },
+  ga: { s: "Gaeilge" },
+  gan: { s: "贛語" },
+  gbm: { s: "गढ़वळी" },
+  gd: { s: "Gàidhlig" },
+  gil: { s: "Taetae ni kiribati" },
+  gl: { s: "Galego" },
+  gn: { s: "Avañe'ẽ" },
+  got: { s: "gutisk" },
+  gu: { s: "ગુજરાતી" },
+  gv: { s: "Gaelg" },
+  ha: { s: "هَوُسَ", rtl: true },
+  hak: { s: "客家語/Hak-kâ-ngî" },
+  haw: { s: "Hawai`i" },
+  he: { s: "עברית", rtl: true },
+  hi: { s: "हिन्दी" },
+  ho: { s: "Hiri Motu" },
+  hr: { s: "Hrvatski" },
+  ht: { s: "Krèyol ayisyen" },
+  hu: { s: "Magyar" },
+  hy: { s: "Հայերեն" },
+  hz: { s: "Otsiherero" },
+  ia: { s: "Interlingua" },
+  id: { s: "Bahasa Indonesia" },
+  ie: { s: "Interlingue" },
+  ig: { s: "Igbo" },
+  ii: { s: "ꆇꉙ / 四川彝语" },
+  ik: { s: "Iñupiak" },
+  ilo: { s: "Ilokano" },
+  inh: { s: "ГӀалгӀай" },
+  io: { s: "Ido" },
+  is: { s: "Íslenska" },
+  it: { s: "Italiano" },
+  iu: { s: "ᐃᓄᒃᑎᑐᑦ" },
+  ja: { s: "日本語" },
+  jbo: { s: "Lojban" },
+  jv: { s: "Basa Jawa" },
+  ka: { s: "ქართული" },
+  kg: { s: "KiKongo" },
+  khw: { s: "کھوار", rtl: true },
+  ki: { s: "Gĩkũyũ" },
+  kj: { s: "Kuanyama" },
+  kk: { s: "Қазақша" },
+  kl: { s: "Kalaallisut" },
+  km: { s: "ភាសាខ្មែរ" },
+  kn: { s: "ಕನ್ನಡ" },
+  ko: { s: "한국어" },
+  kr: { s: "Kanuri" },
+  ks: { s: "कश्मीरी / كشميري", rtl: true },
+  ksh: { s: "Ripoarisch" },
+  ku: { s: "Kurdî / كوردی", rtl: true },
+  kv: { s: "Коми" },
+  kw: { s: "Kernewek" },
+  ky: { s: "Kırgızca / Кыргызча" },
+  la: { s: "Latina" },
+  lad: { s: "Dzhudezmo / Djudeo-Espanyol" },
+  lan: { s: "Leb Lango / Luo" },
+  lb: { s: "Lëtzebuergesch" },
+  lg: { s: "Luganda" },
+  li: { s: "Limburgs" },
+  lij: { s: "Líguru" },
+  lmo: { s: "Lumbaart" },
+  ln: { s: "Lingála" },
+  lo: { s: "ລາວ / Pha xa lao" },
+  lt: { s: "Lietuvių" },
+  lv: { s: "Latviešu" },
+  "map-bms": { s: "Basa Banyumasan" },
+  mg: { s: "官話/官话" },
+  mh: { s: "Kajin Majel / Ebon" },
+  mi: { s: "Māori" },
+  min: { s: "Minangkabau" },
+  mk: { s: "Македонски" },
+  ml: { s: "മലയാളം" },
+  mn: { s: "Монгол" },
+  mo: { s: "Moldovenească" },
+  mr: { s: "मराठी" },
+  ms: { s: "Bahasa Melayu" },
+  mt: { s: "bil-Malti" },
+  mus: { s: "Mvskoke" },
+  mwl: { s: "Mirandés" },
+  my: { s: "Myanmasa" },
+  na: { s: "Dorerin Naoero" },
+  nah: { s: "Nahuatl" },
+  nap: { s: "Nnapulitano" },
+  nb: { s: "Norsk (bokmål)" },
+  nd: { s: "Sindebele" },
+  "nds-nl": { s: "Nedersaksisch" },
+  nds: { s: "Plattdüütsch" },
+  ne: { s: "नेपाली" },
+  new: { s: "नेपालभाषा / Newah Bhaye" },
+  ng: { s: "Oshiwambo" },
+  nl: { s: "Nederlands" },
+  nn: { s: "Norsk (nynorsk)" },
+  no: { s: "Norsk (bokmål / riksmål)" },
+  nr: { s: "isiNdebele" },
+  nrm: { s: "Nouormand / Normaund" },
+  nso: { s: "Sesotho sa Leboa / Sepedi" },
+  nv: { s: "Diné bizaad" },
+  ny: { s: "Chi-Chewa" },
+  oc: { s: "Occitan" },
+  oj: { s: "ᐊᓂᔑᓈᐯᒧᐎᓐ / Anishinaabemowin" },
+  om: { s: "Oromoo" },
+  or: { s: "ଓଡ଼ିଆ" },
+  os: { s: "Иронау" },
+  pa: { s: "ਪੰਜਾਬੀ / पंजाबी / پنجابي" },
+  pag: { s: "Pangasinan" },
+  pam: { s: "Kapampangan" },
+  pap: { s: "Papiamentu" },
+  pdc: { s: "Deitsch" },
+  pi: { s: "Pāli / पाऴि" },
+  pih: { s: "Norfuk" },
+  pl: { s: "Polski" },
+  pms: { s: "Piemontèis" },
+  ps: { s: "پښتو", rtl: true },
+  pt: { s: "Português" },
+  qu: { s: "Runa Simi" },
+  rm: { s: "Rumantsch" },
+  rmy: { s: "Romani / रोमानी" },
+  rn: { s: "Kirundi" },
+  ro: { s: "Română" },
+  "roa-rup": { s: "Armâneashti" },
+  ru: { s: "Русский" },
+  rw: { s: "Kinyarwandi" },
+  sa: { s: "संस्कृतम्" },
+  sc: { s: "Sardu" },
+  scn: { s: "Sicilianu" },
+  sco: { s: "Scots" },
+  sd: { s: "सिनधि" },
+  se: { s: "Davvisámegiella" },
+  sg: { s: "Sängö" },
+  sh: { s: "Srpskohrvatski / Српскохрватски" },
+  si: { s: "සිංහල" },
+  sk: { s: "Slovenčina" },
+  sl: { s: "Slovenščina" },
+  sm: { s: "Gagana Samoa" },
+  sn: { s: "chiShona" },
+  so: { s: "Soomaaliga" },
+  sq: { s: "Shqip" },
+  sr: { s: "Српски" },
+  ss: { s: "SiSwati" },
+  st: { s: "Sesotho" },
+  su: { s: "Basa Sunda" },
+  sv: { s: "Svenska" },
+  sw: { s: "Kiswahili" },
+  ta: { s: "தமிழ்" },
+  te: { s: "తెలుగు" },
+  tet: { s: "Tetun" },
+  tg: { s: "Тоҷикӣ" },
+  th: { s: "ไทย / Phasa Thai" },
+  ti: { s: "ትግርኛ" },
+  tk: { s: "Туркмен / تركمن" },
+  tl: { s: "Tagalog" },
+  tlh: { s: "tlhIngan-Hol" },
+  tn: { s: "Setswana" },
+  to: { s: "Lea Faka-Tonga" },
+  tokipona: { s: "tokipona" },
+  tpi: { s: "Tok Pisin" },
+  tr: { s: "Türkçe" },
+  ts: { s: "Xitsonga" },
+  tt: { s: "Tatarça" },
+  tum: { s: "chiTumbuka" },
+  tw: { s: "Twi" },
+  ty: { s: "Reo Mā`ohi" },
+  udm: { s: "Удмурт кыл" },
+  ug: { s: "Uyƣurqə / ئۇيغۇرچە" },
+  uk: { s: "Українська" },
+  ur: { s: "اردو", rtl: true },
+  uz: { s: "Ўзбек" },
+  ve: { s: "Tshivenḓa" },
+  vec: { s: "Vèneto" },
+  vi: { s: "Việtnam" },
+  vls: { s: "West-Vlaoms" },
+  vo: { s: "Volapük" },
+  wa: { s: "Walon" },
+  war: { s: "Winaray / Binisaya Lineyte-Samarnon" },
+  wo: { s: "Wollof" },
+  xal: { s: "Хальмг" },
+  xh: { s: "isiXhosa" },
+  xmf: { s: "მარგალური" },
+  yi: { s: "ייִדיש", rtl: true },
+  yo: { s: "Yorùbá" },
+  za: { s: "Cuengh / Tôô / 壮语" },
+  "zh-classical": { s: "文言" },
+  "zh-min-nan": { s: "Bân-lâm-gú" },
+  "zh-tw": { s: "‪中文(台灣)‬" },
+  "zh-yue": { s: "粵語 / 粤语" },
+  zh: { s: "中文" },
+  zu: { s: "isiZulu" }
 };
 
 export default {
   name: "LanguageChooser",
-  props: {},
   computed: {
-    supportedLangs() {
+    enabledLanguages() {
       return Object.fromEntries(
-        this.enabledLanguages.map(x => {
-          return [x, langs[x]];
+        this.loadedLocales.map(locale => {
+          return [locale, langs[locale]];
         })
       );
     }
   },
   data() {
     return {
-      // fixme: can we derive this from vue-i18n? maybe from the keys of messages?
-      enabledLanguages: ["en", "nl"]
+      loadedLocales: Object.keys(this.$i18n.messages)
     };
   }
 };
