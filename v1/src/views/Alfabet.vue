@@ -2,15 +2,19 @@
   <div class="container">
     <div class="columns is-mobile is-multiline is-centered">
       <div id="instructionbox" class="column is-full has-text-centered">
-        <div v-if="game.over" class="content">
-          <h1>Alfabet</h1>
-          <h2>{{ $t("alfabet_practice_mode") }}</h2>
-          <p>{{ $t("alfabet_instructions_practice") }}</p>
-        </div>
-        <div v-else class="content">
-          <h1>Alfabet</h1>
-          <h2>{{ $t("alfabet_game_mode") }}</h2>
-          <p>{{ $t("alfabet_instructions_game") }}</p>
+        <div class="content">
+          <h2>
+            {{
+              game.over ? $t("alfabet_practice_mode") : $t("alfabet_game_mode")
+            }}
+          </h2>
+          <p>
+            {{
+              game.over
+                ? $t("alfabet_instructions_practice")
+                : $t("alfabet_instructions_game")
+            }}
+          </p>
         </div>
       </div>
       <div v-if="!game.over" class="column is-full">
@@ -29,7 +33,7 @@
         class="column is-2 has-text-centered"
       >
         <button
-          class="button is-info is-outlined is-large is-uppercase is-rounded is-family-monospace"
+          class="button is-dark is-outlined is-large is-uppercase is-rounded is-family-monospace"
           @click="letterClick(letter)"
         >
           {{ letter }}
@@ -112,8 +116,7 @@ export default {
       audio: {},
       letters,
       goodSound: "freesounddotorg_403018",
-      badSound: "freesounddotorg_249300",
-      gameOverSound: "freesounddotorg_027825"
+      badSound: "freesounddotorg_249300"
     };
   },
   mounted() {
@@ -235,12 +238,32 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #instructionbox {
+  margin-top: 1.5em;
   margin-bottom: 3em;
 }
 
 #startbutton {
   margin-top: 3em;
+}
+
+html {
+  background: linear-gradient(-45deg, #5c258d, #4389a2, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient-animate 15s ease infinite;
+}
+
+/* background animation by https://manuelpinto.in */
+@keyframes gradient-animate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>
