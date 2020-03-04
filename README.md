@@ -42,7 +42,7 @@ This repo's Dockerfile utilises a multi-stage build:
 ### Audio Implementation
 
 * Sound effects come from [freesound](https://www.freesound.org/)
-* Spoken utterances are currently generated using the Apple macOS text-to-speech voices "Ellen" (NL-BE), "Xander" (NL-NL), and "Claire" (NL-NL) - I'm working to determine if there are license requirements for using rendered utterances in this way. See [`gen_audio.sh`](v1/static/audio/gen_audio.sh) to view the code that generates the utterances used in the site.
+* Spoken utterances are currently generated using the Apple macOS text-to-speech voices "Ellen" (NL-BE), "Xander" (NL-NL), and "Claire" (NL-NL) - I'm working to determine if there are license requirements for using rendered utterances in this way. See [`gen_audio.sh`](v1/public/audio/gen_audio.sh) to view the code that generates the utterances used in the site.
 * Audio sprite loading and playback is driven by the [howler.js](https://github.com/goldfire/howler.js) library.
 * I utilize [Tõnis Tiigi's audiosprite utility](https://github.com/tonistiigi/audiosprite) to compile the sounds and utterances into ginormous monolithic audio files of various formats. I currently incorporate the timing data into my vue components manually.
 
