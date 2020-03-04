@@ -7,6 +7,7 @@ This is the primary source code repo for [oefenuw.nl](https://oefenuw.nl/), a si
 
 ## Credits
 
+
 ### Sounds Effects
 
 * The "correct" sound effect used here is [UI Confirmation Alert, C5.wav](https://freesound.org/people/InspectorJ/sounds/403018/) by [InspectorJ](https://www.jshaw.co.uk/) of [Freesound.org](https://freesound.org/)
@@ -17,6 +18,10 @@ This is the primary source code repo for [oefenuw.nl](https://oefenuw.nl/), a si
 * I found this [tutorial by Andreas Löw on using vue-i18n](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n) to be extremely helpful.
 * Language data from: <https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code>
 * This blog post influenced the interface design: <http://www.flagsarenotlanguages.com/> 
+
+### Resources
+
+* <https://www.youtube.com/embed/ZCA2DyqYvF0> and <https://www.learndutch.org/lessons/pronunciation-dutch-alphabet/>
 
 ## Code Notes
 
