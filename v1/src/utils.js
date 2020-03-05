@@ -29,12 +29,20 @@ const voices = ["Ellen", "Claire", "Xander"];
 // ]
 
 function randomlyVoicedLetter(letter) {
-  return randomChoice(voices) + "-letter-" + letter;
+  return voicedLetter(randomChoice(voices), letter);
 }
 
 function randomlyVoicedPhrase(phrase) {
+  return voicedPhrase(randomChoice(voices), phrase);
+}
+
+function voicedLetter(voice, letter) {
+  return voice + "-letter-" + letter;
+}
+
+function voicedPhrase(voice, phrase) {
   const phrase_repr = phrase.toLowerCase().replace(/[^A-Za-z0-9_]+/g, "_");
-  return randomChoice(voices) + "-phrase-" + phrase_repr;
+  return voice + "-phrase-" + phrase_repr;
 }
 
 function randomChoice(arr) {
@@ -75,6 +83,8 @@ export default {
   letters,
   voices,
   randomChoice,
+  voicedLetter,
+  voicedPhrase,
   randomlyVoicedLetter,
   randomlyVoicedPhrase,
   shuffleArray,
