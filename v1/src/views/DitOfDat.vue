@@ -1,9 +1,22 @@
 <template>
-  <div>
-    <p>Click what you hear</p>
-    <div class="buttons" v-for="(pair, index) in pairs" :key="index">
-      <button class="button" @click="playPhrase(pair[0])">{{ pair[0] }}</button>
-      <button class="button" @click="playPhrase(pair[1])">{{ pair[1] }}</button>
+  <div class="section">
+    <div class="container">
+      <div class="box content">
+        <p>Click what you hear.</p>
+        <button class="button" @click="askQuestion">Repeat</button>
+      </div>
+      <div class="field">
+        <div class="buttons has-addons is-centered are-large">
+          <button
+            v-for="(word, index) in question"
+            :key="index"
+            class="button is-info is-light is-outlined is-uppercase"
+            @click="answerQuestion(word)"
+          >
+            {{ word }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -12,7 +25,7 @@
 import { Howl } from "howler";
 import utils from "@/utils";
 
-const longShortPairs = [
+const wordPairs = [
   // ["Sid Hoffman", "Sid Frenchman"],
   ["mand", "maand"],
   ["rat", "raat"],
@@ -35,18 +48,35 @@ const longShortPairs = [
 ];
 
 export default {
+  name: "DitOfDat",
   data() {
     return {
       audio: {},
-      pairs: longShortPairs
+      goodSound: "freesounddotorg_403018",
+      badSound: "freesounddotorg_249300",
+      voice: "Xander",
+      question: [],
+      answer: ""
     };
   },
   mounted() {
     this.audio = new Howl(utils.loadHowlerConfig());
+    this.nextQuestion();
   },
   methods: {
-    playPhrase(phrase) {
-      this.audio.play(utils.randomlyVoicedPhrase(phrase));
+    nextQuestion() {
+      this.question = utils.randomChoice(wordPairs);
+      this.answer = utils.randomChoice(this.question);
+      this.askQuestion();
+    },
+    askQuestion() {
+      this.audio.play(utils.voicedPhrase(this.voice, this.answer));
+    },
+    answerQuestion(word) {
+      const correct = word == this.answer;
+
+      this.audio.play(correct ? this.goodSound : this.badSound);
+      this.nextQuestion();
     }
   }
 };
