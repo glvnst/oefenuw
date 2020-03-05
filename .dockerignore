@@ -3,6 +3,6 @@
 */node_modules
 */.npm
 */dist
-v1/static/audio/tts
-v1/static/audio/freesound.org
+v1/public/audio/tts
+v1/public/audio/freesound.org
 
