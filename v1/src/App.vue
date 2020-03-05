@@ -2,8 +2,8 @@
   <div id="app">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://oefenuw.nl/">
-          <span class="is-size-3 has-text-primary has-text-weight-semibold"
+        <a class="navbar-item" href="/">
+          <span class="is-size-4 has-text-success has-text-weight-semibold"
             >oefen uw nederlands</span
           >
         </a>
@@ -11,12 +11,14 @@
 
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/">Home</router-link>
-          <router-link class="navbar-item is-tab" to="/about">
-            About
-          </router-link>
-          <router-link class="navbar-item is-tab" to="/alfabet">
-            Alfabet
+          <router-link
+            v-for="(route, i) in $router.options.routes"
+            :key="i"
+            :to="route.path"
+            class="navbar-item is-tab"
+            exact
+          >
+            {{ route.name }}
           </router-link>
         </div>
         <div class="navbar-end">
