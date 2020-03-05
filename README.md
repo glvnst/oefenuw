@@ -21,7 +21,16 @@ This is the primary source code repo for [oefenuw.nl](https://oefenuw.nl/), a si
 
 ### Resources
 
-* <https://www.youtube.com/embed/ZCA2DyqYvF0> and <https://www.learndutch.org/lessons/pronunciation-dutch-alphabet/>
+### Alfabet
+
+I've used these resources to make the alfabet games.
+
+* <https://en.wikipedia.org/wiki/Dutch_orthography>
+* <https://nl.wikipedia.org/wiki/Alfabet>
+* <https://www.learndutch.org/lessons/pronunciation-dutch-alphabet/>
+* <https://www.youtube.com/embed/ZCA2DyqYvF0>
+* <https://www.youtube.com/watch?v=ktikutDOA0E>
+
 
 ## Code Notes
 
