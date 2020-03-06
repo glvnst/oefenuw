@@ -4,9 +4,7 @@
 
 This is the primary source code repo for [oefenuw.nl](https://oefenuw.nl/), a site designed to help you practice the Dutch language. That domain name is intended to be read as "oefen uw nl" ("practice your Nederlands").
 
-
 ## Credits
-
 
 ### Sounds Effects & Audio Implementation
 
@@ -16,11 +14,15 @@ This is the primary source code repo for [oefenuw.nl](https://oefenuw.nl/), a si
 * The sound effects and recorded utterances are then packaged into audio sprites using [Tõnis Tiigi's audiosprite utility](https://github.com/tonistiigi/audiosprite).
 * The audio sprites are loaded and played back in the browser using the [howler.js](https://github.com/goldfire/howler.js) library.
 
-### I18N Interface Elements
+### i18n Interface Elements
 
 * [Andreas Löw's tutorial on using vue-i18n](https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-vue-app-with-vue-i18n) was extremely helpful.
 * Language data came from [Wikimedia's List of language names](https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code).
 * This blog post [flags are not languages](http://www.flagsarenotlanguages.com/) influenced our i18n UI. 
+
+### Typefaces
+
+* We host our fonts for user privacy and security. The [hosted version](https://google-webfonts-helper.herokuapp.com/fonts) of [Mario Ranftl](https://mranftl.com/)'s [google-webfonts-helper](https://github.com/majodev/google-webfonts-helper) was very helpful during development. 
 
 ### Resources
 
@@ -32,11 +34,9 @@ I've used these resources while developing this site:
 * <https://www.youtube.com/embed/ZCA2DyqYvF0>
 * <https://www.youtube.com/watch?v=ktikutDOA0E>
 
-
 ## Code Notes
 
 This repo defines a containerized [single page app](https://en.wikipedia.org/wiki/Single-page_application) written mostly in [ES6](https://en.wikipedia.org/wiki/ECMAScript) and leveraging [Vue.js](https://vuejs.org/). We try to comply with the [vue.js style guide](https://vuejs.org/v2/style-guide/). For UI styling we use the [Bulma CSS framework](https://bulma.io/).
-
 
 ### Docker Container Implementation
 
@@ -57,4 +57,3 @@ Some things left to do:
 Consider what other types of exercises I'll have on the site, some immediate ideas:
 
 * numbers and prices (you hear the number you type it out)
-
