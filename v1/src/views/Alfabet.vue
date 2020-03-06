@@ -2,28 +2,49 @@
   <div class="container">
     <div class="columns is-mobile is-multiline is-centered">
       <div id="instructionbox" class="column is-full has-text-centered">
-        <div class="content">
-          <h2>
-            {{
-              game.over ? $t("alfabet_practice_mode") : $t("alfabet_game_mode")
-            }}
-          </h2>
-          <p>
-            {{
-              game.over
-                ? $t("alfabet_instructions_practice")
-                : $t("alfabet_instructions_game")
-            }}
-          </p>
-        </div>
-      </div>
-      <div v-if="!game.over" class="column is-full">
         <div class="level">
-          <div class="level-item pull-left">
-            {{ $t("score") }}: {{ game.score }}
+          <div class="level-left">
+            <div class="level-item">
+              <div class="content">
+                <span class="title is-2">
+                  {{
+                    game.over
+                      ? $t("alfabet_practice_mode")
+                      : $t("alfabet_game_mode")
+                  }}
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="level-item pull-right">
-            {{ $t("round") }}: {{ game.currentRound }} / {{ game.rounds }}
+          <div class="level-item" style="flex-shrink: 1">
+            <div class="content">
+              <p class="is-size-5" style="margin: 0 1em;">
+                {{
+                  game.over
+                    ? $t("alfabet_instructions_practice")
+                    : $t("alfabet_instructions_game")
+                }}
+              </p>
+            </div>
+          </div>
+          <div v-if="game.over" class="level-item">
+            <button
+              id="startbutton"
+              class="button is-success is-medium is-uppercase"
+              @click="startGame"
+            >
+              {{ $t("alfabet_start_game") }}
+            </button>
+          </div>
+          <div v-if="!game.over" class="level-item pull-left">
+            <span class="title is-3">{{ $t("score") }}</span>
+            <span class="title is-2 score">{{ game.score }}</span>
+          </div>
+          <div v-if="!game.over" class="level-item pull-right">
+            <span class="title is-3">{{ $t("round") }}</span>
+            <span class="title is-2 score">
+              {{ game.currentRound }} / {{ game.rounds }}
+            </span>
           </div>
         </div>
       </div>
@@ -33,19 +54,10 @@
         class="column is-2 has-text-centered"
       >
         <button
-          class="button is-dark is-outlined is-large is-uppercase is-rounded is-family-monospace"
+          class="letterButton button is-info is-large is-uppercase is-rounded"
           @click="letterClick(letter)"
         >
           {{ letter }}
-        </button>
-      </div>
-      <div v-if="game.over" class="column is-full has-text-centered">
-        <button
-          id="startbutton"
-          class="button is-success is-large is-uppercase is-rounded"
-          @click="startGame"
-        >
-          {{ $t("alfabet_start_game") }}
         </button>
       </div>
     </div>
@@ -142,20 +154,20 @@ export default {
       }
 
       if (correct) {
-        // increment the score (by Belgium's founding year... or is it 1830?)
-        this.game.score += 1831;
+        this.game.score += 100;
       } else {
-        // decrement the score (by half of Belgium's founding year)
-        this.game.score -= 915;
+        this.game.score -= 50;
       }
 
-      this.playSprite(correct ? this.goodSound : this.badSound).then(() => {
-        if (this.game.over) {
-          this.gameOver();
-        } else {
-          this.gameQuestion();
-        }
-      });
+      this.playSprite(correct ? this.goodSound : this.badSound).then(
+        utils.sleep(1).then(() => {
+          if (this.game.over) {
+            this.gameOver();
+          } else {
+            this.gameQuestion();
+          }
+        })
+      );
 
       return true;
     },
@@ -174,31 +186,17 @@ export default {
 </script>
 
 <style>
+button.button.letterButton {
+  font-family: "Rubik Mono One";
+}
+
 #instructionbox {
   margin-top: 1.5em;
   margin-bottom: 3em;
 }
 
-#startbutton {
-  margin-top: 3em;
-}
-
-html {
-  background: linear-gradient(-45deg, #5c258d, #4389a2, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient-animate 15s ease infinite;
-}
-
-/* background animation by https://manuelpinto.in */
-@keyframes gradient-animate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.score {
+  font-family: "Bungee Shade";
+  padding: 0 0.5em 0 0.5em;
 }
 </style>
