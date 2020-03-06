@@ -61,7 +61,9 @@ export default {
   },
   mounted() {
     this.audio = new Howl(utils.loadHowlerConfig());
-    this.nextQuestion();
+    utils.sleep(1).then(() => {
+      this.nextQuestion();
+    });
   },
   methods: {
     nextQuestion() {
@@ -76,7 +78,9 @@ export default {
       const correct = word == this.answer;
 
       this.audio.play(correct ? this.goodSound : this.badSound);
-      this.nextQuestion();
+      utils.sleep(0.6).then(() => {
+        this.nextQuestion();
+      });
     }
   }
 };
