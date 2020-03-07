@@ -69,11 +69,11 @@ html {
 
 #logotype {
   // "Bungee Inline", "Fredericka the Great", "Monoton", "Quicksand", "Saira", "Rubik Mono One",
-  font-family: "Rubik Mono One";
+  font-family: "Rubik Mono One", Helvetica, sans-serif;
 }
 
 nav {
-  font-family: "Saira";
+  font-family: "Saira", Helvetica, sans-serif;
   font-size: 1.15em;
 }
 
