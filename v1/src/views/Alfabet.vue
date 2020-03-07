@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       mode: "Practice",
-      rounds: 3,
+      rounds: 30,
       letters: utils.letters
     };
   },

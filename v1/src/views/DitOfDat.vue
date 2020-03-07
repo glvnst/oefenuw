@@ -92,17 +92,6 @@
       </div>
     </div>
   </div>
-
-  <!--
-  <div class="section">
-    <div class="container">
-      <div class="box content">
-        <p>Click what you hear.</p>
-        <button class="button" @click="askQuestion">Repeat</button>
-      </div>
-    </div>
-  </div>
-  -->
 </template>
 
 <script>
@@ -138,7 +127,7 @@ export default {
     return {
       wordPairs,
       voice: "Xander",
-      rounds: 3
+      rounds: 15
     };
   },
   methods: {
