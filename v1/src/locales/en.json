@@ -1,10 +1,12 @@
 {
   "score": "Score",
   "round": "Round",
-  "alfabet_start_game": "Start Game",
-  "alfabet_thanks": "Thanks for playing!",
-  "alfabet_practice_mode": "Practice Mode",
-  "alfabet_game_mode": "Game ON!",
+  "repeat": "Repeat",
+  "start_game": "Start Game",
+  "practice_mode": "Practice Mode",
+  "game_mode": "Game ON!",
+  "thanks_for_playing": "Thanks for playing!",
   "alfabet_instructions_practice": "Choose a letter to hear it. When you're ready, click the \"Start Game\" button to test your skill.",
-  "alfabet_instructions_game": "Choose the letters you hear!"
+  "alfabet_instructions_game": "Choose the letters you hear!",
+  "ditofdat_instructions": "Choose what you hear."
 }

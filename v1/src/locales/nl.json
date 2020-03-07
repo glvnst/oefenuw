@@ -1,10 +1,12 @@
 {
   "score": "Score",
   "round": "Round",
-  "alfabet_start_game": "Starten van het spel",
-  "alfabet_thanks": "Bedankt voor het spelen!",
-  "alfabet_practice_mode": "Oefenmodus",
-  "alfabet_game_mode": "Spelmodus",
+  "repeat": "Herhalen",
+  "start_game": "Starten van het spel",
+  "practice_mode": "Oefenmodus",
+  "game_mode": "Spelmodus",
+  "thanks_for_playing": "Bedankt voor het spelen!",
   "alfabet_instructions_practice": "Klik op een brief om het te horen. Als je klaar bent, klik dan op de \"Start Game\" knop om je vaardigheid te testen.",
-  "alfabet_instructions_game": "Klik op de brief die je hoort!"
+  "alfabet_instructions_game": "Klik op de brief die je hoort!",
+  "ditofdat_instructions": "Kies wat je hoort."
 }
