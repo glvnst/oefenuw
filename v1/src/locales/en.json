@@ -9,5 +9,12 @@
   "alfabet_instructions_practice": "Choose a letter to hear it. When you're ready, click the \"Start Game\" button to test your skill.",
   "alfabet_instructions_game": "Choose the letters you hear!",
   "ditofdat_practice_instructions": "Choose words from the pairs below to hear them.",
-  "ditofdat_game_instructions": "Choose the word you hear."
+  "ditofdat_game_instructions": "Choose the word you hear.",
+  "about_oss": "This site is open-source software, for details see the license file in {repo}.",
+  "about_repo": "the source code repository",
+  "about_our_games": "Our Games",
+  "about_title": "About this site",
+  "about_description": "This site is here to help you practice parts of the Dutch language. It is created by some friends in Belgium who are taking a Dutch 1.1 class.",
+  "description_alfabet": "This game helps you learn how to pronounce the letters of the Dutch alphabet!",
+  "description_ditofdat": "This games helps you to learn the difference between the long and short Dutch vowel sounds!"
 }
