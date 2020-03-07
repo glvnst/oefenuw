@@ -17,7 +17,11 @@
           <div class="level-item" style="flex-shrink: 1">
             <div class="content">
               <p class="is-size-5" style="margin: 0 1em;">
-                {{ $t("ditofdat_instructions") }}
+                {{
+                  gameOver
+                    ? $t("ditofdat_practice_instructions")
+                    : $t("ditofdat_game_instructions")
+                }}
               </p>
             </div>
           </div>
@@ -60,13 +64,13 @@
       <div
         v-for="(wordPair, index) in wordPairs"
         :key="index"
-        class="column is-2"
+        class="column is-3"
       >
         <div class="buttons has-addons is-centered">
           <button
             v-for="(word, index) in wordPair"
             :key="index"
-            class="word-button button is-light is-uppercase"
+            class="word-button button is-info is-uppercase"
             @click="playPracticeWord(word)"
           >
             {{ word }}
@@ -80,7 +84,7 @@
         <button
           v-for="(word, index) in questions[currentRound - 1]"
           :key="index"
-          class="word-button button is-light is-success is-uppercase"
+          class="word-button button is-info is-uppercase"
           @click="answer(word)"
         >
           {{ word }}
