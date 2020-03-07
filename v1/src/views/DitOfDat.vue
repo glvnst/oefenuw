@@ -1,89 +1,188 @@
 <template>
-  <div class="section">
-    <div class="container">
-      <div class="box content">
-        <p>Click what you hear.</p>
-        <button class="button" @click="askQuestion">Repeat</button>
+  <div class="container">
+    <div class="columns is-mobile is-multiline is-centered">
+      <div id="instructionbox" class="column is-full has-text-centered">
+        <div class="level">
+          <!-- -->
+          <div class="level-left">
+            <div class="level-item">
+              <div class="content">
+                <span class="title is-2">
+                  {{ gameOver ? $t("practice_mode") : $t("game_mode") }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- -->
+          <div class="level-item" style="flex-shrink: 1">
+            <div class="content">
+              <p class="is-size-5" style="margin: 0 1em;">
+                {{ $t("ditofdat_instructions") }}
+              </p>
+            </div>
+          </div>
+          <!-- -->
+          <div v-if="!gameOver" class="level-item">
+            <button
+              class="button is-dark is-small is-rounded is-uppercase"
+              @click="askQuestion"
+            >
+              {{ $t("repeat") }}
+            </button>
+          </div>
+          <!-- -->
+          <div v-if="gameOver" class="level-item">
+            <button
+              id="startbutton"
+              class="button is-success is-medium is-uppercase"
+              @click="beginGame"
+            >
+              {{ $t("start_game") }}
+            </button>
+          </div>
+          <!-- -->
+          <div v-if="!gameOver" class="level-item pull-left">
+            <span class="title is-3">{{ $t("score") }}</span>
+            <span class="title is-2 score">{{ score }}</span>
+          </div>
+          <!-- -->
+          <div v-if="!gameOver" class="level-item pull-right">
+            <span class="title is-3">{{ $t("round") }}</span>
+            <span class="title is-2 score">
+              {{ currentRound }} / {{ rounds }}
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="field">
-        <div class="buttons has-addons is-centered are-large">
+    </div>
+    <div v-if="gameOver" class="columns is-mobile is-multiline is-centered">
+      <!-- Practice Buttons -->
+      <div
+        v-for="(wordPair, index) in wordPairs"
+        :key="index"
+        class="column is-2"
+      >
+        <div class="buttons has-addons is-centered">
           <button
-            v-for="(word, index) in question"
+            v-for="(word, index) in wordPair"
             :key="index"
-            class="button is-info is-light is-outlined is-uppercase"
-            @click="answerQuestion(word)"
+            class="word-button button is-light is-uppercase"
+            @click="playPracticeWord(word)"
           >
             {{ word }}
           </button>
         </div>
       </div>
     </div>
+    <!-- Gameboard -->
+    <div v-if="!gameOver" class="field">
+      <div class="buttons is-centered are-large">
+        <button
+          v-for="(word, index) in questions[currentRound - 1]"
+          :key="index"
+          class="word-button button is-light is-success is-uppercase"
+          @click="answer(word)"
+        >
+          {{ word }}
+        </button>
+      </div>
+    </div>
   </div>
+
+  <!--
+  <div class="section">
+    <div class="container">
+      <div class="box content">
+        <p>Click what you hear.</p>
+        <button class="button" @click="askQuestion">Repeat</button>
+      </div>
+    </div>
+  </div>
+  -->
 </template>
 
 <script>
-import { Howl } from "howler";
 import utils from "@/utils";
+import { audioGameMixin } from "@/mixins/audioGameMixin.js";
 
 const wordPairs = [
   // ["Sid Hoffman", "Sid Frenchman"],
-  ["mand", "maand"],
-  ["rat", "raat"],
-  ["mat", "maat"],
-  ["zak", "zaak"],
-  ["hak", "haak"],
-  ["ram", "raam"],
   ["bal", "baal"],
-  ["man", "maan"],
+  ["bom", "boom"],
+  ["bos", "boos"],
+  ["bot", "boot"],
+  ["hak", "haak"],
+  ["kop", "koop"],
   ["lat", "laat"],
   ["lok", "look"],
-  ["zon", "zoon"],
-  ["bom", "boom"],
-  ["ros", "roos"],
-  ["bos", "boos"],
-  ["kop", "koop"],
-  ["bot", "boot"],
+  ["man", "maan"],
+  ["mand", "maand"],
+  ["mat", "maat"],
   ["pot", "poot"],
-  ["ton", "toon"]
+  ["ram", "raam"],
+  ["rat", "raat"],
+  ["ros", "roos"],
+  ["ton", "toon"],
+  ["zak", "zaak"],
+  ["zon", "zoon"]
 ];
 
 export default {
   name: "DitOfDat",
+  mixins: [audioGameMixin],
   data() {
     return {
-      audio: {},
-      goodSound: "freesounddotorg_403018",
-      badSound: "freesounddotorg_249300",
+      wordPairs,
       voice: "Xander",
-      question: [],
-      answer: ""
+      rounds: 3
     };
   },
-  mounted() {
-    this.audio = new Howl(utils.loadHowlerConfig());
-    utils.sleep(1).then(() => {
-      this.nextQuestion();
-    });
-  },
   methods: {
-    nextQuestion() {
-      this.question = utils.randomChoice(wordPairs);
-      this.answer = utils.randomChoice(this.question);
-      this.askQuestion();
+    populateQuestions() {
+      const pool = [...wordPairs];
+      utils.shuffleArray(pool);
+
+      // select the question pair
+      for (let i = 0; i < this.rounds; i++) {
+        this.questions.push(
+          pool.length > 0 ? pool.pop() : utils.randomChoice(wordPairs)
+        );
+      }
+
+      // now select the answer from each pair
+      for (let question of this.questions) {
+        this.answerKey.push(utils.randomChoice(question));
+      }
+    },
+    playPracticeWord(word) {
+      return this.playSprite(utils.voicedPhrase(this.voice, word));
     },
     askQuestion() {
-      this.audio.play(utils.voicedPhrase(this.voice, this.answer));
+      this.playSprite(
+        utils.voicedPhrase(this.voice, this.answerKey[this.currentRound - 1])
+      );
     },
-    answerQuestion(word) {
-      const correct = word == this.answer;
-
-      this.audio.play(correct ? this.goodSound : this.badSound);
-      utils.sleep(0.6).then(() => {
-        this.nextQuestion();
+    endGame() {
+      this.playPracticeWord("super").then(() => {
+        alert(this.$i18n.t("thanks_for_playing"));
       });
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+button.button.word-button {
+  font-family: "Rubik Mono One", Helvetica, Arial, sans-serif;
+}
+
+#instructionbox {
+  margin-top: 1.5em;
+  margin-bottom: 3em;
+}
+
+.score {
+  font-family: "Bungee Shade", Helvetica, Arial, sans-serif;
+  padding: 0 0.5em 0 0.5em;
+}
+</style>

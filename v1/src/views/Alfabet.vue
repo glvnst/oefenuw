@@ -7,11 +7,7 @@
             <div class="level-item">
               <div class="content">
                 <span class="title is-2">
-                  {{
-                    game.over
-                      ? $t("alfabet_practice_mode")
-                      : $t("alfabet_game_mode")
-                  }}
+                  {{ gameOver ? $t("practice_mode") : $t("game_mode") }}
                 </span>
               </div>
             </div>
@@ -20,30 +16,38 @@
             <div class="content">
               <p class="is-size-5" style="margin: 0 1em;">
                 {{
-                  game.over
+                  gameOver
                     ? $t("alfabet_instructions_practice")
                     : $t("alfabet_instructions_game")
                 }}
               </p>
             </div>
           </div>
-          <div v-if="game.over" class="level-item">
+          <div v-if="!gameOver" class="level-item">
+            <button
+              class="button is-dark is-small is-rounded is-uppercase"
+              @click="askQuestion"
+            >
+              {{ $t("repeat") }}
+            </button>
+          </div>
+          <div v-if="gameOver" class="level-item">
             <button
               id="startbutton"
               class="button is-success is-medium is-uppercase"
-              @click="startGame"
+              @click="beginGame"
             >
-              {{ $t("alfabet_start_game") }}
+              {{ $t("start_game") }}
             </button>
           </div>
-          <div v-if="!game.over" class="level-item pull-left">
+          <div v-if="!gameOver" class="level-item pull-left">
             <span class="title is-3">{{ $t("score") }}</span>
-            <span class="title is-2 score">{{ game.score }}</span>
+            <span class="title is-2 score">{{ score }}</span>
           </div>
-          <div v-if="!game.over" class="level-item pull-right">
+          <div v-if="!gameOver" class="level-item pull-right">
             <span class="title is-3">{{ $t("round") }}</span>
             <span class="title is-2 score">
-              {{ game.currentRound }} / {{ game.rounds }}
+              {{ currentRound }} / {{ rounds }}
             </span>
           </div>
         </div>
@@ -65,121 +69,57 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { Howl } from "howler";
 import utils from "@/utils";
+import { audioGameMixin } from "@/mixins/audioGameMixin.js";
 
 export default {
   name: "Alfabet",
+  mixins: [audioGameMixin],
   components: {},
   data() {
     return {
       mode: "Practice",
-      game: { over: true },
-      audio: {},
-      letters: utils.letters,
-      goodSound: "freesounddotorg_403018",
-      badSound: "freesounddotorg_249300"
+      rounds: 3,
+      letters: utils.letters
     };
   },
-  mounted() {
-    this.audio = new Howl(utils.loadHowlerConfig());
-  },
   methods: {
-    playSprite(spriteName) {
-      // eslint-disable-next-line no-console
-      console.log("playing", spriteName);
-      return new Promise(resolve => {
-        this.audio.once("end", resolve, this.audio.play(spriteName));
-      });
+    populateQuestions() {
+      const pool = [...utils.letters];
+      utils.shuffleArray(pool);
+
+      for (let i = 0; i < this.rounds; i++) {
+        this.questions.push(
+          pool.length > 0 ? pool.pop() : utils.randomChoice(utils.letters)
+        );
+      }
+      // in this game the questions and correct answers are the same
+      this.answerKey = this.questions;
     },
     letterClick(letter) {
-      if (this.game.over) {
+      if (this.gameOver) {
         // practice mode
         this.playSprite(utils.randomlyVoicedLetter(letter));
       } else {
         // game mode
-        this.gameAnswer(letter);
+        this.answer(letter);
       }
     },
-    newGame() {
-      const game = {
-        questions: [],
-        answers: [],
-        rounds: 30,
-        currentRound: 1,
-        score: 0,
-        over: false
-      };
-
-      // populate the questions
-      const pool = [...utils.letters];
-      utils.shuffleArray(pool);
-
-      for (let i = 0; i < game.rounds; i++) {
-        game.questions.push(
-          pool.length > 0 ? pool.pop() : utils.randomChoice(utils.letters)
-        );
-      }
-
-      for (const prop in game) {
-        Vue.set(this.game, prop, game[prop]);
-      }
-    },
-    gameQuestion() {
-      if (this.game.over) {
+    askQuestion() {
+      if (this.gameOver) {
         return true;
       }
 
       this.playSprite(
-        utils.randomlyVoicedLetter(
-          this.game.questions[this.game.currentRound - 1]
-        )
+        utils.randomlyVoicedLetter(this.questions[this.currentRound - 1])
       );
 
       return true;
     },
-    gameAnswer(answer) {
-      const desiredLetter = this.game.questions[this.game.currentRound - 1];
-      const correct = answer === desiredLetter;
-
-      // record the answer
-      this.game.answers.push(answer);
-
-      // advance the round
-      if (this.game.currentRound >= this.game.rounds) {
-        this.game.over = true;
-      } else {
-        this.game.currentRound += 1;
-      }
-
-      if (correct) {
-        this.game.score += 100;
-      } else {
-        this.game.score -= 50;
-      }
-
-      this.playSprite(correct ? this.goodSound : this.badSound).then(
-        utils.sleep(1).then(() => {
-          if (this.game.over) {
-            this.gameOver();
-          } else {
-            this.gameQuestion();
-          }
-        })
-      );
-
-      return true;
-    },
-    gameOver() {
+    endGame() {
       this.playSprite(utils.randomlyVoicedPhrase("super")).then(() => {
-        alert(this.$i18n.t("alfabet_thanks"));
+        alert(this.$i18n.t("thanks_for_playing"));
       });
-      return true;
-    },
-    startGame() {
-      this.newGame();
-      this.gameQuestion();
     }
   }
 };
@@ -187,7 +127,7 @@ export default {
 
 <style>
 button.button.letterButton {
-  font-family: "Rubik Mono One";
+  font-family: "Rubik Mono One", Helvetica, Arial, sans-serif;
 }
 
 #instructionbox {
@@ -196,7 +136,7 @@ button.button.letterButton {
 }
 
 .score {
-  font-family: "Bungee Shade";
+  font-family: "Bungee Shade", Helvetica, Arial, sans-serif;
   padding: 0 0.5em 0 0.5em;
 }
 </style>
