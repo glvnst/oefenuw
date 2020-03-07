@@ -3,10 +3,11 @@
   "round": "Round",
   "repeat": "Repeat",
   "start_game": "Start Game",
-  "practice_mode": "Practice Mode",
-  "game_mode": "Game ON!",
+  "practice_mode": "Practice",
+  "game_mode": "Playing",
   "thanks_for_playing": "Thanks for playing!",
   "alfabet_instructions_practice": "Choose a letter to hear it. When you're ready, click the \"Start Game\" button to test your skill.",
   "alfabet_instructions_game": "Choose the letters you hear!",
-  "ditofdat_instructions": "Choose what you hear."
+  "ditofdat_practice_instructions": "Choose words from the pairs below to hear them.",
+  "ditofdat_game_instructions": "Choose the word you hear."
 }
