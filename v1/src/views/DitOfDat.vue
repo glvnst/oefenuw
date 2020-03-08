@@ -1,5 +1,13 @@
 <template>
   <div>
+    <HighScoresModal
+      :score="score"
+      :answers="answers"
+      :highScores="highScores"
+      :visible="highScoresVisible"
+      @close="highScoresVisible = false"
+    ></HighScoresModal>
+
     <div id="instructionbox" class="container has-text-centered">
       <div class="level">
         <!-- -->
@@ -95,6 +103,7 @@
 <script>
 import utils from "@/utils";
 import { audioGameMixin } from "@/mixins/audioGameMixin.js";
+import HighScoresModal from "@/components/HighScoresModal.vue";
 
 const wordPairs = [
   // ["Sid Hoffman", "Sid Frenchman"],
@@ -121,6 +130,7 @@ const wordPairs = [
 export default {
   name: "DitOfDat",
   mixins: [audioGameMixin],
+  components: { HighScoresModal },
   data() {
     return {
       wordPairs,
@@ -152,11 +162,6 @@ export default {
       this.playSprite(
         utils.voicedPhrase(this.voice, this.answerKey[this.currentRound - 1])
       );
-    },
-    endGame() {
-      this.playPracticeWord("super").then(() => {
-        alert(this.$i18n.t("thanks_for_playing"));
-      });
     }
   }
 };

@@ -7,6 +7,7 @@ export const audioGameMixin = {
       audio: {},
       goodSound: "freesounddotorg_403018",
       badSound: "freesounddotorg_249300",
+      gameOverSound: utils.randomlyVoicedPhrase("super"),
 
       rounds: 0,
 
@@ -15,7 +16,10 @@ export const audioGameMixin = {
       currentRound: 1,
       gameOver: true,
       questions: [],
-      score: 0
+      score: 0,
+
+      highScores: [],
+      highScoresVisible: false
     };
   },
   created() {
@@ -39,6 +43,8 @@ export const audioGameMixin = {
       this.gameOver = false;
       this.questions = new Array();
       this.score = 0;
+
+      this.highScoresVisible = false;
 
       this.populateQuestions();
     },
@@ -83,7 +89,21 @@ export const audioGameMixin = {
       return this.playSprite(this.badSound);
     },
     endGame() {
-      return true;
+      this.recordScore(this.score);
+      this.highScoresVisible = true;
+      this.playSprite(this.gameOverSound);
+    },
+    recordScore() {
+      let newHighScores = [...this.highScores];
+      newHighScores.push(this.score);
+      newHighScores.sort((a, b) => {
+        return b - a;
+      });
+
+      this.highScores = newHighScores.slice(
+        0,
+        Math.min(newHighScores.length, 5)
+      );
     }
   }
 };

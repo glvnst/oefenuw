@@ -1,5 +1,13 @@
 <template>
   <div>
+    <HighScoresModal
+      :score="score"
+      :answers="answers"
+      :highScores="highScores"
+      :visible="highScoresVisible"
+      @close="highScoresVisible = false"
+    ></HighScoresModal>
+
     <div id="instructionbox" class="container has-text-centered">
       <div class="level">
         <div class="level-left">
@@ -74,11 +82,12 @@
 <script>
 import utils from "@/utils";
 import { audioGameMixin } from "@/mixins/audioGameMixin.js";
+import HighScoresModal from "@/components/HighScoresModal.vue";
 
 export default {
   name: "Alfabet",
   mixins: [audioGameMixin],
-  components: {},
+  components: { HighScoresModal },
   data() {
     return {
       mode: "Practice",
@@ -118,11 +127,6 @@ export default {
       );
 
       return true;
-    },
-    endGame() {
-      this.playSprite(utils.randomlyVoicedPhrase("super")).then(() => {
-        alert(this.$i18n.t("thanks_for_playing"));
-      });
     }
   }
 };
