@@ -105,15 +105,15 @@ nav {
   font-size: 1.15em;
 }
 
-// /* baloo-regular - latin-ext_latin */
-// @font-face {
-//   font-family: "Baloo";
-//   font-style: normal;
-//   font-weight: 400;
-//   src: local("Baloo Regular"), local("Baloo-Regular"),
-//     url("/fonts/baloo-v5-latin-ext_latin-regular.woff2") format("woff2"),
-//     url("/fonts/baloo-v5-latin-ext_latin-regular.woff") format("woff");
-// }
+/* baloo-regular - latin-ext_latin */
+@font-face {
+  font-family: "Baloo";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Baloo Regular"), local("Baloo-Regular"),
+    url("/fonts/baloo-v5-latin-ext_latin-regular.woff2") format("woff2"),
+    url("/fonts/baloo-v5-latin-ext_latin-regular.woff") format("woff");
+}
 
 // /* black-han-sans-regular - latin */
 // @font-face {
@@ -168,14 +168,14 @@ nav {
 // }
 
 /* monoton-regular - latin */
-@font-face {
-  font-family: "Monoton";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Monoton"), local("Monoton-Regular"),
-    url("/fonts/monoton-v9-latin-regular.woff2") format("woff2"),
-    url("/fonts/monoton-v9-latin-regular.woff") format("woff");
-}
+// @font-face {
+//   font-family: "Monoton";
+//   font-style: normal;
+//   font-weight: 400;
+//   src: local("Monoton"), local("Monoton-Regular"),
+//     url("/fonts/monoton-v9-latin-regular.woff2") format("woff2"),
+//     url("/fonts/monoton-v9-latin-regular.woff") format("woff");
+// }
 
 // /* quicksand-regular - latin-ext_latin */
 // @font-face {
