@@ -5,9 +5,11 @@
   "start_game": "Démarrer le jeu",
   "practice_mode": "Pratique",
   "game_mode": "Jouer",
+  "high_scores": "Meilleurs scores",
+  "errors": "Erreurs",
   "thanks_for_playing": "Merci d'avoir joué !",
   "alfabet_instructions_practice": "Choisissez une lettre pour l'entendre. Quand vous êtes prêt, cliquez sur le bouton \"Démarrer le jeu\" pour tester votre habileté.",
-  "alfabet_instructions_game": "Choisissez les lettres que vous entendez !",
+  "alfabet_instructions_game": "Choisissez les lettres que vous entendez!",
   "ditofdat_practice_instructions": "Choisissez des mots dans les paires ci-dessous pour les entendre.",
   "ditofdat_game_instructions": "Choisissez le mot que vous entendez.",
   "about_oss": "Ce site est un logiciel à code source ouvert, pour plus de détails, voir le fichier de licence dans {repo}.",
@@ -15,6 +17,6 @@
   "about_our_games": "Nos jeux",
   "about_title": "A propos de ce site",
   "about_description": "Ce site est là pour vous aider à pratiquer certaines parties de la langue néerlandaise. Il est créé par des amis en Belgique qui suivent un cours de néerlandais 1.1.",
-  "description_alfabet": "Ce jeu vous aide à apprendre à prononcer les lettres de l'alphabet néerlandais !",
-  "description_ditofdat": "Ce jeu vous aide à apprendre la différence entre les sons longs et courts des voyelles néerlandaises !"
+  "description_alfabet": "Ce jeu vous aide à apprendre à prononcer les lettres de l'alphabet néerlandais!",
+  "description_ditofdat": "Ce jeu vous aide à apprendre la différence entre les sons longs et courts des voyelles néerlandaises!"
 }

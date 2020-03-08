@@ -5,6 +5,8 @@
   "start_game": "Start Game",
   "practice_mode": "Practice",
   "game_mode": "Playing",
+  "high_scores": "High Scores",
+  "errors": "Errors",
   "thanks_for_playing": "Thanks for playing!",
   "alfabet_instructions_practice": "Choose a letter to hear it. When you're ready, click the \"Start Game\" button to test your skill.",
   "alfabet_instructions_game": "Choose the letters you hear!",
