@@ -6,25 +6,43 @@
       aria-label="main navigation"
     >
       <div class="navbar-brand">
-        <a id="logotype" class="navbar-item is-size-4" href="/">
-          oefen uw nederlands!
+        <a
+          id="logotype"
+          class="navbar-item is-size-4 is-size-6-mobile"
+          href="/"
+        >
+          oefen uw nederlands
+        </a>
+
+        <a
+          role="button"
+          :class="{ 'navbar-burger': true, 'is-active': mobileMenu }"
+          aria-label="menu"
+          aria-expanded="false"
+          @click="mobileMenu = !mobileMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
+      <div :class="{ 'navbar-menu': true, 'is-active': mobileMenu }">
         <div class="navbar-start">
           <router-link
             v-for="(route, i) in $router.options.routes"
             :key="i"
             :to="route.path"
+            @click.native="mobileMenu = false"
             class="navbar-item is-tab"
             exact
           >
             {{ route.name }}
           </router-link>
         </div>
+
         <div class="navbar-end">
-          <div class="navbar-item">
+          <div class="navbar-item has-text-centered">
             <LanguageChooser></LanguageChooser>
           </div>
         </div>
@@ -39,6 +57,12 @@
 import LanguageChooser from "@/components/LanguageChooser.vue";
 
 export default {
+  name: "App",
+  data() {
+    return {
+      mobileMenu: false
+    };
+  },
   components: {
     LanguageChooser
   }
@@ -57,6 +81,10 @@ html {
     )
     no-repeat center center fixed;
   background-size: cover;
+}
+
+body {
+  overflow: hidden;
 }
 
 #app {

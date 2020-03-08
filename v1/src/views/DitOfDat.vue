@@ -1,61 +1,59 @@
 <template>
-  <div class="container">
-    <div class="columns is-mobile is-multiline is-centered">
-      <div id="instructionbox" class="column is-full has-text-centered">
-        <div class="level">
-          <!-- -->
-          <div class="level-left">
-            <div class="level-item">
-              <div class="content">
-                <span class="title is-2">
-                  {{ gameOver ? $t("practice_mode") : $t("game_mode") }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <!-- -->
-          <div class="level-item" style="flex-shrink: 1">
+  <div>
+    <div id="instructionbox" class="container has-text-centered">
+      <div class="level">
+        <!-- -->
+        <div class="level-left">
+          <div class="level-item">
             <div class="content">
-              <p class="is-size-5" style="margin: 0 1em;">
-                {{
-                  gameOver
-                    ? $t("ditofdat_practice_instructions")
-                    : $t("ditofdat_game_instructions")
-                }}
-              </p>
+              <span class="title is-2">
+                {{ gameOver ? $t("practice_mode") : $t("game_mode") }}
+              </span>
             </div>
           </div>
-          <!-- -->
-          <div v-if="!gameOver" class="level-item">
-            <button
-              class="button is-dark is-small is-rounded is-uppercase"
-              @click="askQuestion"
-            >
-              {{ $t("repeat") }}
-            </button>
+        </div>
+        <!-- -->
+        <div class="level-item" style="flex-shrink: 1">
+          <div class="content">
+            <p class="is-size-5" style="margin: 0 1em;">
+              {{
+                gameOver
+                  ? $t("ditofdat_practice_instructions")
+                  : $t("ditofdat_game_instructions")
+              }}
+            </p>
           </div>
-          <!-- -->
-          <div v-if="gameOver" class="level-item">
-            <button
-              id="startbutton"
-              class="button is-success is-medium is-uppercase"
-              @click="beginGame"
-            >
-              {{ $t("start_game") }}
-            </button>
-          </div>
-          <!-- -->
-          <div v-if="!gameOver" class="level-item pull-left">
-            <span class="title is-3">{{ $t("score") }}</span>
-            <span class="title is-2 score">{{ score }}</span>
-          </div>
-          <!-- -->
-          <div v-if="!gameOver" class="level-item pull-right">
-            <span class="title is-3">{{ $t("round") }}</span>
-            <span class="title is-2 score">
-              {{ currentRound }} / {{ rounds }}
-            </span>
-          </div>
+        </div>
+        <!-- -->
+        <div v-if="!gameOver" class="level-item">
+          <button
+            class="button is-dark is-small is-rounded is-uppercase"
+            @click="askQuestion"
+          >
+            {{ $t("repeat") }}
+          </button>
+        </div>
+        <!-- -->
+        <div v-if="gameOver" class="level-item">
+          <button
+            id="startbutton"
+            class="button is-success is-medium is-uppercase"
+            @click="beginGame"
+          >
+            {{ $t("start_game") }}
+          </button>
+        </div>
+        <!-- -->
+        <div v-if="!gameOver" class="level-item pull-left">
+          <span class="title is-3">{{ $t("score") }}</span>
+          <span class="title is-2 score">{{ score }}</span>
+        </div>
+        <!-- -->
+        <div v-if="!gameOver" class="level-item pull-right">
+          <span class="title is-3">{{ $t("round") }}</span>
+          <span class="title is-2 score">
+            {{ currentRound }} / {{ rounds }}
+          </span>
         </div>
       </div>
     </div>
@@ -64,7 +62,7 @@
       <div
         v-for="(wordPair, index) in wordPairs"
         :key="index"
-        class="column is-3"
+        class="column is-full-mobile is-4-tablet is-3-desktop"
       >
         <div class="buttons has-addons is-centered">
           <button

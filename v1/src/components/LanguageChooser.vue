@@ -1,6 +1,6 @@
 <template>
   <div class="control has-icons-left">
-    <div class="select is-rounded">
+    <div class="select is-rounded is-fullwidth">
       <select v-model="$i18n.locale">
         <option
           v-for="(lang, langCode) in enabledLanguages"
