@@ -50,9 +50,12 @@ This repo's Dockerfile utilizes a multi-stage build:
 Some things left to do:
 
 * briefly flash or outline the correct answer when the user gets it wrong
-* make the thing more colorful
-* do some kind of post-game report modal (scores, perhaps timing, and a report about wrong answers)
+* work on improving the colors
+* improve post-game report, persist the data somewhere (scores, perhaps timing, and a report card)
 * investigate a high score screen
+* more languages!
+	* **adding an RTL language and having it present correctly would be a big win**
+	* I'll need to find typefaces that support non-latin languages
 
 Consider what other types of exercises I'll have on the site, some immediate ideas:
 
