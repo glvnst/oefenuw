@@ -1,0 +1,20 @@
+{
+  "score": "Partitur",
+  "round": "Runde",
+  "repeat": "Wiederholen",
+  "start_game": "Spiel starten",
+  "practice_mode": "Praxis",
+  "game_mode": "Spielen",
+  "thanks_for_playing": "Danke fürs Mitspielen!",
+  "alfabet_instructions_practice": "Wählen Sie einen Brief, um ihn zu hören. Wenn Sie bereit sind, klicken Sie auf die Schaltfläche \"Spiel starten\", um Ihr Können zu testen.",
+  "alfabet_instructions_game": "Wählen Sie die Buchstaben aus, die Sie hören!",
+  "ditofdat_practice_instructions": "Wählen Sie Wörter aus den untenstehenden Paaren, um sie zu hören.",
+  "ditofdat_game_instructions": "Wählen Sie das Wort aus, das Sie hören.",
+  "about_oss": "Diese Website ist Open-Source-Software, Einzelheiten finden Sie in der Lizenzdatei in {repo}.",
+  "about_repo": "Das Quellcode-Depot",
+  "about_our_games": "Unsere Spiele",
+  "about_title": "Über diese Website",
+  "about_description": "Diese Website soll Ihnen helfen, Teile der niederländischen Sprache zu üben. Sie wurde von einigen Freunden in Belgien erstellt, die einen Niederländisch 1.1-Kurs belegen.",
+  "description_alfabet": "Dieses Spiel hilft Ihnen, die Aussprache der Buchstaben des niederländischen Alphabets zu lernen!",
+  "description_ditofdat": "Dieses Spiel hilft Ihnen, den Unterschied zwischen den langen und kurzen niederländischen Vokalen zu lernen!"
+}
