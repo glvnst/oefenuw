@@ -5,3 +5,4 @@ docker-compose.override.yml
 */node_modules
 */.npm
 */dist
+.DS_Store
