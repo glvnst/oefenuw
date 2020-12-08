@@ -58,7 +58,7 @@ function shuffleArray(array) {
 }
 
 function sleep(seconds) {
-  return new Promise(function(resolve) {
+  return new Promise(resolve => {
     setTimeout(resolve, seconds * 1000);
   });
 }
